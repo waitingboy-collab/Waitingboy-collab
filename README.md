@@ -7,7 +7,6 @@ I am a detail-oriented Quality Assurance and Software Engineering student at Sof
 - 📚 **Tech Stack I use:** JavaScript, TypeScript, C#, HTML5, CSS3, Git, GitHub Pages.
 - 🎯 **Future Goals:** Mastering Advanced QA Automation (Playwright, Selenium) and CI/CD integration.
 # BG-RouteMaster Pro | QA Documentation & Methodology
-
 ### [cite_start]GPS Localization & Road Route Validation Report [cite: 2]
 
 ---
