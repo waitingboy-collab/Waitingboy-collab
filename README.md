@@ -6,49 +6,50 @@ I am a detail-oriented Quality Assurance and Software Engineering student at Sof
 - 🛠️ **What I'm currently working on:** Enhancing web applications and building automation frameworks.
 - 📚 **Tech Stack I use:** JavaScript, TypeScript, C#, HTML5, CSS3, Git, GitHub Pages.
 - 🎯 **Future Goals:** Mastering Advanced QA Automation (Playwright, Selenium) and CI/CD integration.
+--------------------------------------------------------------------------------------------------------
 # BG-RouteMaster Pro | QA Documentation & Methodology
-### [cite_start]GPS Localization & Road Route Validation Report [cite: 2]
+### GPS Localization & Road Route Validation Report
 
 ---
 
-## [cite_start]1. Test Process Summary & Root Cause Analysis [cite: 3]
+## 1. Test Process Summary & Root Cause Analysis
 
-[cite_start]During the development and integration of the geo-localization module in **BG-RouteMaster Pro**, a critical logical defect (Bug) was identified[cite: 4]. [cite_start]The software miscalculated total distances when compared to real-world commercial navigation systems (such as Google Maps)[cite: 4].
+During the development and integration of the geo-localization module in **BG-RouteMaster Pro**, a critical logical defect (Bug) was identified. The software miscalculated total distances when compared to real-world commercial navigation systems (such as Google Maps).
 
-* [cite_start]**Root Cause:** The initial software model relied on a static delta-calculation based on the assumption that the user always starts from a fixed zero point (Kardzhali)[cite: 5]. [cite_start]When tested from a real-world position 46 km away from Kardzhali, the software calculated a straight-line ("as the crow flies") distance relative to the city center, instead of the actual road distance to the final destination[cite: 6].
-* [cite_start]**Resolution:** Implemented a dynamic algorithm based on the **Haversine formula** integrated with a **Road Curvature Coefficient (1.28)** specifically optimized for the Bulgarian road network[cite: 7].
+* **Root Cause:** The initial software model relied on a static delta-calculation based on the assumption that the user always starts from a fixed zero point (Kardzhali). When tested from a real-world position 46 km away from Kardzhali, the software calculated a straight-line ("as the crow flies") distance relative to the city center, instead of the actual road distance to the final destination.
+* **Resolution:** Implemented a dynamic algorithm based on the **Haversine formula** integrated with a **Road Curvature Coefficient (1.28)** specifically optimized for the Bulgarian road network.
 
 ---
 
-## [cite_start]2. Executed Test Cases [cite: 8]
+## 2. Executed Test Cases
 
 | ID | Test Description | Expected Result | Initial Status | Final Status |
 | :--- | :--- | :--- | :---: | :---: |
-| **TC-01** | [cite_start]Validation of base destinations (Start: Kardzhali center)[cite: 9]. | [cite_start]Distance must match Google Maps (e.g., Burgas: 245 km)[cite: 9]. | [cite_start]🔴 MISMATCH [cite: 9] | [cite_start]🟢 SUCCESS [cite: 9] |
-| **TC-02** | [cite_start]Browser GPS module test (satellite/air signal)[cite: 9]. | [cite_start]Successful extraction of exact coordinates (Lat/Lng) via Geolocation API[cite: 9]. | [cite_start]🟢 SUCCESS [cite: 9] | [cite_start]🟢 SUCCESS [cite: 9] |
-| **TC-03** | [cite_start]Integration test under a 46 km deviation from the center[cite: 9]. | [cite_start]Recalculate route directly to destination without using Kardzhali as a mask[cite: 9]. | [cite_start]🔴 WRONG KM [cite: 9] | [cite_start]🟢 FIXED [cite: 9] |
-| **TC-04** | [cite_start]Mathematical model test (Road Coefficient: 1.28)[cite: 9]. | [cite_start]Transformation of straight-line coordinates into real road curves[cite: 9]. | [cite_start]🟢 SUCCESS [cite: 9] | [cite_start]🟢 SUCCESS [cite: 9] |
-| **TC-05** | [cite_start]Boundary Value Analysis (Speed limits)[cite: 9]. | [cite_start]Activation of a `warning-box` exactly when exceeding limits per Traffic Law[cite: 9]. | [cite_start]🟢 SUCCESS [cite: 9] | [cite_start]🟢 SUCCESS [cite: 9] |
+| **TC-01** | Validation of base destinations (Start: Kardzhali center). | Distance must match Google Maps (e.g., Burgas: 245 km). | 🔴 MISMATCH | 🟢 SUCCESS |
+| **TC-02** | Browser GPS module test (satellite/air signal). | Successful extraction of exact coordinates (Lat/Lng) via Geolocation API. | 🟢 SUCCESS | 🟢 SUCCESS |
+| **TC-03** | Integration test under a 46 km deviation from the center. | Recalculate route directly to destination without using Kardzhali as a mask. | 🔴 WRONG KM | 🟢 FIXED |
+| **TC-04** | Mathematical model test (Road Coefficient: 1.28). | Transformation of straight-line coordinates into real road curves. | 🟢 SUCCESS | 🟢 SUCCESS |
+| **TC-05** | Boundary Value Analysis (Speed limits). | Activation of a `warning-box` exactly when exceeding limits per Traffic Law. | 🟢 SUCCESS | 🟢 SUCCESS |
 
 ---
 
-## [cite_start]3. QA Methodology & Applied Testing Techniques [cite: 12, 13]
+## 3. QA Methodology & Applied Testing Techniques
 
-[cite_start]To ensure complete coverage and quality of the routing algorithm, the following software testing methods were applied[cite: 13]:
+To ensure complete coverage and quality of the routing algorithm, the following software testing methods were applied:
 
-### [cite_start]A. Black-Box Testing [cite: 14]
-[cite_start]Testing performed entirely from the user's perspective without internal code modifications during execution[cite: 15].
-* [cite_start]**Equivalence Partitioning:** Divided destinations into distinct regional groups (e.g., Southern Black Sea Coast, Northern Bulgaria) to validate correct UI clustering inside the `<optgroup>` elements[cite: 16].
-* [cite_start]**Boundary Value Analysis (BVA):** Evaluated speed input fields exactly at the legal thresholds (e.g., 90 km/h and 91 km/h) to verify proper triggering of traffic warning notifications[cite: 17].
+### A. Black-Box Testing
+Testing performed entirely from the user's perspective without internal code modifications during execution.
+* **Equivalence Partitioning:** Divided destinations into distinct regional groups (e.g., Southern Black Sea Coast, Northern Bulgaria) to validate correct UI clustering inside the `<optgroup>` elements.
+* **Boundary Value Analysis (BVA):** Evaluated speed input fields exactly at the legal thresholds (e.g., 90 km/h and 91 km/h) to verify proper triggering of traffic warning notifications.
 
-### [cite_start]B. Integration Testing [cite: 18]
-[cite_start]Validated the seamless data flow and communication between two isolated components[cite: 19]:
-* [cite_start]The hardware/browser-based GPS sensor (`navigator.geolocation`)[cite: 19].
-* [cite_start]The internal JavaScript database (`bgRoutes Database`)[cite: 19].
-* [cite_start]*Goal:* To confirm that incoming latitude/longitude coordinates successfully dynamically update the `value` attributes of DOM elements in real-time[cite: 20].
+### B. Integration Testing
+Validated the seamless data flow and communication between two isolated components:
+* The hardware/browser-based GPS sensor (`navigator.geolocation`).
+* The internal JavaScript database (`bgRoutes Database`).
+* *Goal:* To confirm that incoming latitude/longitude coordinates successfully dynamically update the `value` attributes of DOM elements in real-time.
 
-### [cite_start]C. Regression Testing [cite: 21]
-[cite_start]Executed the entire core test suite after modifying the formula to fix the 46 km deviation bug[cite: 22]. [cite_start]This ensured that the new mathematical triangulation did not break existing features, such as arrival time estimation (`addMinutesToTime`) and fuel cost calculations[cite: 23].
+### C. Regression Testing
+Executed the entire core test suite after modifying the formula to fix the 46 km deviation bug. This ensured that the new mathematical triangulation did not break existing features, such as arrival time estimation (`addMinutesToTime`) and fuel cost calculations.
 
 ---
 
@@ -63,6 +64,6 @@ Since this project focuses on precision and calculations, I have performed thoro
 
 ---
 
-## [cite_start]5. Conclusion & QA Assessment [cite: 24]
+## 5. Conclusion & QA Assessment
 
-[cite_start]Following the final testing iteration and the architectural shift of the GPS calculator from "offset-based" to "direct terrestrial triangulation", the application meets accuracy standards[cite: 25]. [cite_start]The system is stable, free of hardcoded values, and fully ready for deployment to the **Production** environment[cite: 26].
+Following the final testing iteration and the architectural shift of the GPS calculator from "offset-based" to "direct terrestrial triangulation", the application meets accuracy standards. The system is stable, free of hardcoded values, and fully ready for deployment to the **Production** environment.
